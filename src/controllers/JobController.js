@@ -14,6 +14,7 @@ module.exports = {
     const { page = 1, tech } = req.query
 
     let jobs, options = {
+      sort: { createdAt: -1 },
       populate: "by_company",
       limit: 15,
       page
@@ -22,7 +23,7 @@ module.exports = {
     if (tech)
       jobs = await Job.paginate({ requirements: tech }, options)
     else 
-      jobs = await Job.paginate({ },options)
+      jobs = await Job.paginate({}, options)
 
     return res.json(jobs)
   },
